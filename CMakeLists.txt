@@ -15,8 +15,12 @@ find_package(Qt6 COMPONENTS
         REQUIRED)
 
 add_executable(qt_minesweeper app/main.cpp
+        app/appplication.qrc
         app/mainwindow.cpp
-        app/mainwindow.h)
+        app/mainwindow.h
+        app/tile.cpp
+        app/tile.h
+        app/constants.h)
 target_link_libraries(qt_minesweeper
         Qt::Core
         Qt::Gui

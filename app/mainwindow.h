@@ -7,6 +7,8 @@
 
 #include <QMainWindow>
 #include <QPushButton>
+#include <QGridLayout>
+#include "tile.h"
 
 namespace Ui {
 
@@ -19,14 +21,18 @@ Q_OBJECT
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
+
     ~MainWindow() override;
 
 private slots:
 
-    void handleButton();
+    void onLeftClicked(Tile *tile);
+
+    void onRightClicked(Tile *tile);
 
 private:
-    QPushButton *m_button;
+    QGridLayout *gridLayout;
+    Tile *tiles[30][16];
 };
 
 #endif //QT_MINESWEEPER_MAINWINDOW_H
