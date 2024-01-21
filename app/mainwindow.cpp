@@ -14,7 +14,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     connect(m_button, &QPushButton::released, this, &MainWindow::handleButton);
 }
 
-MainWindow::~MainWindow() = default;
+MainWindow::~MainWindow() {
+    delete m_button;
+}
 
 void MainWindow::handleButton() {
     // change the text
