@@ -2,5 +2,17 @@
 <RCC version="1.0">
     <qresource prefix="/">
         <file>assets/bomb.png</file>
+        <file>assets/bomb_explode.png</file>
+        <file>assets/tile.png</file>
+        <file>assets/mine_flag.png</file>
+        <file>assets/question_mark.png</file>
+        <file>assets/zero_tile.png</file>
+        <file>assets/one_tile.png</file>
+        <file>assets/two_tile.png</file>
+        <file>assets/three_tile.png</file>
+        <file>assets/four_tile.png</file>
+        <file>assets/five_tile.png</file>
+        <file>assets/six_tile.png</file>
+        <file>assets/seven_tile.png</file>
     </qresource>
 </RCC>

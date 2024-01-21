@@ -4,6 +4,7 @@
 
 #include "mainwindow.h"
 #include "constants.h"
+#include "gamelogichandler.h"
 #include <iostream>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), gridLayout(new QGridLayout) {
@@ -12,27 +13,21 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), gridLayout(new QG
     centralWidget->setLayout(gridLayout);
     gridLayout->setSpacing(1);
 
+    gameLogicHandler = new GameLogicHandler(centralWidget);
+
     for (int i = 0; i < GRID_WIDTH; ++i) {
         for (int j = 0; j < GRID_HEIGHT; ++j) {
-            tiles[i][j] = new Tile(centralWidget);
-            gridLayout->addWidget(tiles[i][j], j, i);
-            connect(tiles[i][j], &Tile::leftClicked, this, &MainWindow::onLeftClicked);
-            connect(tiles[i][j], &Tile::rightClicked, this, &MainWindow::onRightClicked);
+            Tile *tile = gameLogicHandler->getTile(i, j);
+            gridLayout->addWidget(tile, j, i);
+            connect(tile, &Tile::leftClicked, this, &MainWindow::onLeftClicked);
+            connect(tile, &Tile::rightClicked, this, &MainWindow::onRightClicked);
         }
     }
-
-//    // Connect button signal to appropriate slot
-//    connect(testButton, &QPushButton::released, this, &MainWindow::handleButton);
 }
 
 MainWindow::~MainWindow() {
-    // Ensure proper deletion of tiles
-    for (int i = 0; i < 30; ++i) {
-        for (int j = 0; j < 16; ++j) {
-            delete tiles[i][j];
-        }
-    }
     delete gridLayout;
+    delete gameLogicHandler;
 }
 
 void MainWindow::onLeftClicked(Tile *tile) {

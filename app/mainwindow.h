@@ -9,6 +9,7 @@
 #include <QPushButton>
 #include <QGridLayout>
 #include "tile.h"
+#include "gamelogichandler.h"
 
 namespace Ui {
 
@@ -32,7 +33,8 @@ private slots:
 
 private:
     QGridLayout *gridLayout;
-    Tile *tiles[30][16];
+    GameLogicHandler *gameLogicHandler;
+//    Tile *tiles[30][16];
 };
 
 #endif //QT_MINESWEEPER_MAINWINDOW_H

@@ -20,7 +20,9 @@ add_executable(qt_minesweeper app/main.cpp
         app/mainwindow.h
         app/tile.cpp
         app/tile.h
-        app/constants.h)
+        app/constants.h
+        app/gamelogichandler.cpp
+        app/gamelogichandler.h)
 target_link_libraries(qt_minesweeper
         Qt::Core
         Qt::Gui
