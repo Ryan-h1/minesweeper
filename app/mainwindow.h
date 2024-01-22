@@ -1,6 +1,9 @@
-//
-// Created by Ryan Hecht  on 2024-01-20.
-//
+/**
+ * @file mainwindow.h
+ * @author Ryan Hecht
+ * @date 2024-01-21
+ * @brief Header file of the MainWindow responsible in the Minesweeper game.
+ */
 
 #ifndef QT_MINESWEEPER_MAINWINDOW_H
 #define QT_MINESWEEPER_MAINWINDOW_H
@@ -11,30 +14,35 @@
 #include "tile.h"
 #include "gamelogichandler.h"
 
-namespace Ui {
-
-    class MainWindow;
-
-} // Ui
-
 class MainWindow : public QMainWindow {
 Q_OBJECT
 
 public:
+
     explicit MainWindow(QWidget *parent = nullptr);
 
     ~MainWindow() override;
 
+    MainWindow(const MainWindow &) = delete;
+
+    MainWindow &operator=(const MainWindow &) = delete;
+
+    MainWindow(MainWindow &&) = delete;
+
+    MainWindow &operator=(MainWindow &&) = delete;
+
+
+signals:
+
+    void restartGame();
+
 private slots:
 
-    void onLeftClicked(Tile *tile);
-
-    void onRightClicked(Tile *tile);
+    void onGameOver(bool won);
 
 private:
     QGridLayout *gridLayout;
     GameLogicHandler *gameLogicHandler;
-//    Tile *tiles[30][16];
 };
 
 #endif //QT_MINESWEEPER_MAINWINDOW_H

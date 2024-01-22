@@ -17,33 +17,10 @@ public:
 
     ~Tile() override;
 
-signals:
+    void reveal(bool gameOver);
 
-    void leftClicked(Tile *tile);
+    void reset();
 
-    void rightClicked(Tile *tile);
-
-private:
-    void mousePressEvent(QMouseEvent *event) override;
-
-    void onLeftClicked();
-
-    void onRightClicked();
-
-    void blowUp();
-
-    void reveal();
-
-    void attachIcon(const QString &path);
-
-    enum class MarkState {
-        UNMARKED,
-        FLAGGED,
-        QUESTIONED
-    };
-
-    MarkState markState;
-public:
     int getAdjacentMines() const;
 
     void setAdjacentMines(int adjacentMines);
@@ -56,7 +33,24 @@ public:
 
     void setRevealed(bool revealed);
 
+signals:
+
+    void tileRevealed(bool steppedOnMine);
+
 private:
+    void mousePressEvent(QMouseEvent *event) override;
+
+    void onRightClicked();
+
+    void attachIcon(const QString &path);
+
+    enum class MarkState {
+        UNMARKED,
+        FLAGGED,
+        QUESTIONED
+    };
+
+    MarkState markState;
     int adjacentMines; // [0, 8]
     bool mine;
     bool revealed;
