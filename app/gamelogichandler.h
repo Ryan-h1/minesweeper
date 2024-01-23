@@ -52,15 +52,13 @@ private:
 
     void calculateAdjacentMines();
 
-    void deleteAllTiles();
-
     Tile *tiles[GRID_WIDTH][GRID_HEIGHT];
     int revealedNonBombTiles;
     int totalNonBombTiles;
 
 private slots:
 
-    void onTileRevealed(bool steppedOnMine);
+    void onTileRevealed(Tile *tile, bool steppedOnMine);
 
 };
 

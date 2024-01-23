@@ -21,7 +21,7 @@ GameLogicHandler::GameLogicHandler(QWidget *parent) {
     // Perform onetime initialization of tiles
     for (int x = 0; x < GRID_WIDTH; x++) {
         for (int y = 0; y < GRID_HEIGHT; y++) {
-            tiles[x][y] = new Tile(parent);
+            tiles[x][y] = new Tile(parent, x, y);
             connect(tiles[x][y], &Tile::tileRevealed, this, &GameLogicHandler::onTileRevealed);
         }
     }
@@ -163,7 +163,7 @@ void GameLogicHandler::calculateAdjacentMines() {
  *
  * @param steppedOnMine Indicates whether the revealed tile was a mine.
  */
-void GameLogicHandler::onTileRevealed(bool steppedOnMine) {
+void GameLogicHandler::onTileRevealed(Tile *tile, bool steppedOnMine) {
     if (steppedOnMine) {
         // Player stepped on a mine, reveal all tiles and end game as loss
         for (int x = 0; x < GRID_WIDTH; x++) {
@@ -176,6 +176,26 @@ void GameLogicHandler::onTileRevealed(bool steppedOnMine) {
 
         emit gameOver(false); // Emit loss
     } else {
+        // Player did not step on a mine, reveal adjacent tiles if there are no adjacent mines
+        // This algorithm ends up being pseudo-recursive, since it calls reveal on tile, which
+        // calls this slot again which calls reveal on adjacent tiles, and so on, etc.
+        if (tile->getAdjacentMines() == 0) {
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    int nx = tile->getI() + i;
+                    int ny = tile->getJ() + j;
+
+                    // Check if the adjacent tile is within the grid bounds
+                    if (nx >= 0 && nx < GRID_WIDTH && ny >= 0 && ny < GRID_HEIGHT) {
+                        // Reveal the adjacent tile if it is not already revealed
+                        if (!tiles[nx][ny]->isRevealed()) {
+                            tiles[nx][ny]->reveal(false);
+                        }
+                    }
+                }
+            }
+        }
+
         revealedNonBombTiles++; // Increment the count of safe revealed tiles
 
         // Check if the player has won by revealing all non-bomb tiles
@@ -184,3 +204,4 @@ void GameLogicHandler::onTileRevealed(bool steppedOnMine) {
         }
     }
 }
+

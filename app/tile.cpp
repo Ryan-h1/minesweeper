@@ -16,9 +16,11 @@
  *
  * @param parent The QWidget parent of this tile, usually the game board.
  */
-Tile::Tile(QWidget *parent) : QPushButton(parent) {
+Tile::Tile(QWidget *parent, int i, int j) : QPushButton(parent) {
     setFixedSize(30, 40);
     attachIcon(":/assets/tile.png");
+    this->i = i;
+    this->j = j;
     markState = MarkState::UNMARKED;
     adjacentMines = 0;
     mine = false;
@@ -46,6 +48,7 @@ Tile::~Tile() = default;
  */
 void Tile::reveal(bool isGameOver) {
     bool steppedOnMine = false;
+    bool shouldCauseChainReaction = false;
 
     if (isMine()) {
         if (isGameOver) {
@@ -58,6 +61,7 @@ void Tile::reveal(bool isGameOver) {
         switch (adjacentMines) {
             case 0:
                 attachIcon(":/assets/zero_tile.png");
+                shouldCauseChainReaction = true;
                 break;
             case 1:
                 attachIcon(":/assets/one_tile.png");
@@ -96,12 +100,7 @@ void Tile::reveal(bool isGameOver) {
         return;
     }
 
-    if (steppedOnMine) {
-        emit tileRevealed(true);
-    } else {
-        emit tileRevealed(false);
-    }
-
+    emit tileRevealed(this, steppedOnMine);
 }
 
 /**
@@ -117,6 +116,26 @@ void Tile::reset() {
     revealed = false;
     setDisabled(false);
     attachIcon(":/assets/tile.png");
+}
+
+/**
+ * @function getI
+ * @brief Returns the tile's i-coordinate.
+ *
+ * @return The tile's i-coordinate.
+ */
+int Tile::getI() const {
+    return i;
+}
+
+/**
+ * @function getJ
+ * @brief Returns the tile's j-coordinate.
+ *
+ * @return The tile's j-coordinate.
+ */
+int Tile::getJ() const {
+    return j;
 }
 
 /**

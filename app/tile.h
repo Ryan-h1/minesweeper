@@ -17,13 +17,17 @@ class Tile : public QPushButton {
 Q_OBJECT
 
 public:
-    explicit Tile(QWidget *parent);
+    explicit Tile(QWidget *parent, int i, int j);
 
     ~Tile() override;
 
     void reveal(bool gameOver);
 
     void reset();
+
+    int getI() const;
+
+    int getJ() const;
 
     int getAdjacentMines() const;
 
@@ -39,7 +43,7 @@ public:
 
 signals:
 
-    void tileRevealed(bool steppedOnMine);
+    void tileRevealed(Tile *tile, bool chainReaction);
 
 private:
     void mousePressEvent(QMouseEvent *event) override;
@@ -55,6 +59,8 @@ private:
     };
 
     MarkState markState;
+    int i; // [0, GRID_WIDTH)
+    int j; // [0, GRID_HEIGHT)
     int adjacentMines; // [0, 8]
     bool mine;
     bool revealed;
