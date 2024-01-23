@@ -14,6 +14,7 @@
 #include "gamelogichandler.h"
 
 /**
+ * @function MainWindow
  * @brief Constructor for MainWindow.
  *
  * This constructor sets up the main window of the Minesweeper game, including the grid of tiles
@@ -40,15 +41,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), gridLayout(new QG
 }
 
 /**
+ * @function ~MainWindow
  * @brief Destructor for MainWindow.
  *
  * Cleans up dynamically allocated resources owned by the MainWindow instance.
  */
 MainWindow::~MainWindow() {
     delete gridLayout;
+    delete gameLogicHandler;
 }
 
 /**
+ * @function onGameOver
  * @brief Handles the game-over event.
  *
  * Invoked when the GameLogicHandler emits the gameOver signal. This slot displays a message box

@@ -1,7 +1,11 @@
-//
-// Created by Ryan Hecht  on 2024-01-21.
-//
-
+/**
+ * @file tile.h
+ * @author Ryan Hecht
+ * @date 2024-01-21
+ * @brief Defines the Tile class that represents a single tile in the Minesweeper game.
+ *
+ * Tile is a QPushButton that represents a single tile in the Minesweeper game.
+ */
 #ifndef QT_MINESWEEPER_TILE_H
 #define QT_MINESWEEPER_TILE_H
 
@@ -40,7 +44,7 @@ signals:
 private:
     void mousePressEvent(QMouseEvent *event) override;
 
-    void onRightClicked();
+    void updateMarkState();
 
     void attachIcon(const QString &path);
 

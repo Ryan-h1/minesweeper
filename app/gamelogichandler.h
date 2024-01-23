@@ -4,7 +4,7 @@
  * @date 2024-01-21
  * @brief Defines the GameLogicHandler class that manages the state and logic of the Minesweeper game.
  *
- * GameLogicHandler is a singleton responsible for initializing the game grid with tiles, setting up mines,
+ * GameLogicHandler is a responsible for initializing the game grid with tiles, setting up mines,
  * calculating adjacent mines for each tile, and determining the game's end conditions. It provides
  * the functionality to restart the game and to handle tile reveal actions, emitting signals when
  * the game is over due to a win or a loss.
@@ -26,6 +26,14 @@ public:
 
     ~GameLogicHandler() override;
 
+    GameLogicHandler(const GameLogicHandler &) = delete;
+
+    GameLogicHandler &operator=(const GameLogicHandler &) = delete;
+
+    GameLogicHandler(GameLogicHandler &&) = delete;
+
+    GameLogicHandler &operator=(GameLogicHandler &&) = delete;
+
     Tile *getTile(int x, int y);
 
 signals:
@@ -43,6 +51,8 @@ private:
     void initializeBombLocations();
 
     void calculateAdjacentMines();
+
+    void deleteAllTiles();
 
     Tile *tiles[GRID_WIDTH][GRID_HEIGHT];
     int revealedNonBombTiles;

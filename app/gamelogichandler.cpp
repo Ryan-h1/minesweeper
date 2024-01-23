@@ -9,6 +9,7 @@
 #include "gamelogichandler.h"
 
 /**
+ * @function GameLogicHandler
  * @brief Constructor for GameLogicHandler.
  *
  * Initializes the game grid and connects the tile revealed signal to the appropriate slot.
@@ -29,6 +30,7 @@ GameLogicHandler::GameLogicHandler(QWidget *parent) {
 }
 
 /**
+ * @function ~GameLogicHandler
  * @brief Destructor for GameLogicHandler.
  *
  * Cleans up resources when the GameLogicHandler instance is destroyed.
@@ -42,6 +44,14 @@ GameLogicHandler::~GameLogicHandler() {
     }
 };
 
+/**
+ * @function getTile
+ * @brief Gets the tile at the specified location.
+ *
+ * @param x The x-coordinate of the tile.
+ * @param y The y-coordinate of the tile.
+ * @return The tile at the specified location.
+ */
 Tile *GameLogicHandler::getTile(int x, int y) {
     if (x >= 0 && x < GRID_WIDTH && y >= 0 && y < GRID_HEIGHT) {
         return tiles[x][y];
@@ -52,6 +62,7 @@ Tile *GameLogicHandler::getTile(int x, int y) {
 }
 
 /**
+ * @function restartGame
  * @brief Restarts the game.
  *
  * Resets all tiles and reinitializes the game board.
@@ -68,6 +79,7 @@ void GameLogicHandler::restartGame() {
 }
 
 /**
+ * @function initializeGame
  * @brief Initializes the game state.
  *
  * Sets the initial state of the game, including the number of non-bomb tiles and resetting the revealed tiles counter.
@@ -82,6 +94,7 @@ void GameLogicHandler::initializeGame() {
 }
 
 /**
+ * @function initializeBombLocations
  * @brief Initializes bomb locations randomly on the grid.
  *
  * This function randomly places mines on the game grid until the number of mines specified by
@@ -104,6 +117,7 @@ void GameLogicHandler::initializeBombLocations() {
 }
 
 /**
+ * @function calculateAdjacentMines
  * @brief Calculates the number of adjacent mines for each tile.
  *
  * Iterates over each tile on the grid and counts the number of adjacent mines. This count is then
@@ -140,6 +154,7 @@ void GameLogicHandler::calculateAdjacentMines() {
 }
 
 /**
+ * @function onTileRevealed
  * @brief Slot to handle when a tile is revealed.
  *
  * When a tile is revealed, this function checks if the tile is a mine. If so, it reveals all tiles

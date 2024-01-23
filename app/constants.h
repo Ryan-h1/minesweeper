@@ -1,6 +1,11 @@
-//
-// Created by Ryan Hecht  on 2024-01-21.
-//
+/**
+ * @file constants.h
+ * @author Ryan Hecht
+ * @date 2024-01-21
+ * @brief Defines constants used throughout the Minesweeper game.
+ *
+ * You can change these constants to change the size of the game grid and the number of mines.
+ */
 
 #ifndef QT_MINESWEEPER_CONSTANTS_H
 #define QT_MINESWEEPER_CONSTANTS_H

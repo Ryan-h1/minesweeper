@@ -6,7 +6,11 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-set(CMAKE_PREFIX_PATH "/Users/ryanhecht/Qt/6.6.1/macos")
+# Change this to your Qt installation path
+set(CMAKE_PREFIX_PATH "path/to/your/Qt/installation")
+
+# For example:
+#set(CMAKE_PREFIX_PATH "/Users/ryanhecht/Qt/6.6.1/macos")
 
 find_package(Qt6 COMPONENTS
         Core
