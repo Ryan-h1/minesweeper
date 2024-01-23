@@ -161,6 +161,7 @@ void GameLogicHandler::calculateAdjacentMines() {
  * and emits a gameOver signal with a loss. If not, it increments the count of revealed non-bomb tiles
  * and checks if the player has won.
  *
+ * @param tile The tile that was revealed.
  * @param steppedOnMine Indicates whether the revealed tile was a mine.
  */
 void GameLogicHandler::onTileRevealed(Tile *tile, bool steppedOnMine) {
